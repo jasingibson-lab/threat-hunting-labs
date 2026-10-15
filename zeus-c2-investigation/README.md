@@ -15,19 +15,21 @@ Analysis of a 24-hour packet capture from an infected host showing command-and-c
 
 RITA flagged the pair 192.168.99.53 to 67.207.93.135 with an 87.50% beacon score, marking it High severity. The connection count was 2,883 with 639.34 MiB transferred over port 80.
 
+![RITA beacon view](rita-beacon-view.png)
+
 ## Investigation
 
 ### Confirming the beaconing pattern
 
 Filtering Wireshark to SYN packets between the two hosts showed 2,884 connection attempts spaced approximately 29-30 seconds apart. That is a near-perfect beaconing interval sustained for the full 24-hour capture.
 
+![Wireshark packet list](wireshark-packet-list.png)
+
 ### Analyzing the payload delivery
 
 Following a single TCP stream revealed an HTTP GET request:
 
-    GET /metro91/admin/1/ppptp.jpg HTTP/1.1
-    Host: mahamaya1ifesciences.com
-    User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1)
+![Wireshark TCP stream](wireshark-tcp-stream.png)
 
 The User-Agent string (Internet Explorer 7 on Windows XP) is a strong indicator of automated tooling. It is the default string used by PowerShell when making web requests without an explicit User-Agent set.
 
