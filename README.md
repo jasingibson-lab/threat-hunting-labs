@@ -7,7 +7,7 @@ Case studies from hands-on threat hunting practice using Zeek, RITA, and Wiresha
 | Lab | Description | Tools |
 |-----|-------------|-------|
 | [Zeus C2 Investigation](zeus-c2-investigation/) | Beaconing detection and fileless PowerShell downloader analysis | Zeek, RITA, Wireshark |
-
+| [PittyTiger C2 Investigation](pittytiger/) | Beaconing to a jittered C2, analysis of an APT-style RAT | Zeek, RITA, Wireshark |
 ## About
 
 These labs document the full workflow from raw packet capture to threat identification and IOC extraction:
