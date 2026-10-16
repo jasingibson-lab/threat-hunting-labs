@@ -66,6 +66,7 @@ DNS queries showed expected destinations: http.kali.org from apt update, www.goo
 
 ![Wireshark DNS traffic](homenet-dns-2026-10-16.png)
 
+
 ### Host traffic leak (security observation)
 
 During analysis, TLS traffic from 192.168.1.173 (the Windows host machine running the VM) appeared in the pcap. The VM was able to see unicast traffic from a device it should not have been able to observe.
