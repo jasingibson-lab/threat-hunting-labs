@@ -17,7 +17,7 @@ Analysis of a 1-hour packet capture from a home network, captured from a Kali Li
 
 ## Capture Notes
 
-This pcap has been scrubbed before publication. The original capture contained traffic from the Windows host machine running the VM (192.168.1.173), which was visible to the VM due to a VMware bridged-networking behavior. That traffic was removed from the published file to avoid exposing the host's browsing metadata.
+During analysis, traffic from the Windows host machine running the VM (192.168.1.173) was discovered in the capture. This traffic was visible to the VM due to a VMware bridged-networking behavior. It was removed from the working file to isolate the VM's own traffic for analysis.
 
 The presence of host traffic in a guest VM capture is itself a security-relevant observation and is documented in the Findings section below.
 
