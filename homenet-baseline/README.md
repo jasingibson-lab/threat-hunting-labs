@@ -13,7 +13,7 @@ Analysis of a 1-hour packet capture from a home network, captured from a Kali Li
 - **Platform:** Kali Linux (VMware VM, bridged networking)
 - **Local network:** 192.168.1.0/24
 - **Capturing host:** 192.168.1.178 (Kali VM)
-- **Capturing host:** 192.168.1.178 (Kali VM)
+
 
 ## Capture Notes
 
@@ -72,7 +72,7 @@ During analysis, TLS traffic from 192.168.1.173 (the Windows host machine runnin
 
 On a properly isolated switched network, a VM should only see traffic to and from itself, plus broadcast traffic. It should not see unicast traffic between other devices. Host-to-destination traffic (like 192.168.1.173 to 140.82.113.26 for GitHub) is unicast. A VM on the same bridged network should not see it. The fact that it appeared suggests VMware's bridged networking is mirroring some host traffic to the guest's virtual interface.
 
-Impact:
+#### Impact:
 
 - Guest can observe host activity. Domain names, timing, and traffic patterns from the host's browsing are visible in the guest's capture. TLS encrypts the content, but the metadata (SNI, DNS, timing) is unencrypted.
 - Relevant in security-sensitive environments. If a user runs untrusted VMs on their workstation, those VMs may be able to passively monitor host traffic.
