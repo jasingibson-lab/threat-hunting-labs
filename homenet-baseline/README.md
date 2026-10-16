@@ -83,12 +83,16 @@ This was observed but not fully investigated. A deeper analysis would involve ch
 
 None. This is a baseline capture with no malicious activity. All connections are to legitimate services (Google, YouTube, Kali package mirrors, Microsoft).
 
-## Lessons Learned
+## Summary
 
-1. Baselines are valuable. Establishing what normal looks like is the first step toward detecting abnormal. A SOC analyst who knows their network's normal pattern can spot deviations faster than one who only looks at alerts.
+This capture established a baseline for a small home network over a one-hour window. Three findings came out of the analysis:
 
-2. Passive reconnaissance works. Device inventory was built from broadcast traffic alone, without sending a single probe. This is useful in situations where active scanning is not possible or not welcome.
+1. Device inventory was built from passive capture alone — no active scanning. Devices identified include a router/AP (Arcadyan), networking equipment (CommScope), an IoT device (Espressif), and a Nintendo console.
 
-3. Network isolation is not always complete. Host traffic appearing in a guest VM capture shows that virtual network boundaries can leak. Anyone running VMs on a production network should verify the actual isolation level.
+2. RITA flagged no significant beaconing. The highest score was 50% at Low severity — consistent with routine background services, not C2 traffic.
 
-4. Realistic captures contain noise. This pcap is 99% broadcast noise. Real analyst work involves filtering out that noise to find the signal — which is exactly what the Wireshark filters in this analysis did.
+3. Host traffic from the Windows machine running the VM appeared in the guest capture. This suggests incomplete network isolation between host and guest under the current VMware bridged configuration.
+
+The capture is 99% broadcast noise, which is normal for a home network with multiple smart devices. The remaining traffic reflects the Kali VM's own activity and the host's, both scrubbed of content by TLS but visible in metadata.
+
+Next steps would be to confirm the unknown devices, verify VMware isolation settings, and re-capture periodically to compare against this baseline.
