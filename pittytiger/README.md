@@ -2,7 +2,7 @@
 
 ## Overview
 
-Analysis of a 1-hour packet capture from an infected host showing command-and-control (C2) beaconing to a Taiwan domain. PittyTiger is a remote access trojan (RAT) attributed to an APT group, distinct from commodity crimeware like Zeus.
+Analysis of a 1-hour packet capture from an infected host showing command-and-control (C2) beaconing to a Taiwan domain. PittyTiger is a remote access trojan (RAT) attributed to an APT group.
 
 ## Environment
 
@@ -15,7 +15,8 @@ Analysis of a 1-hour packet capture from an infected host showing command-and-co
 
 ## Initial Detection
 
-RITA flagged the pair 192.168.99.54 to 159.65.220.246 with an 87.00% beacon score, marking it Medium severity. The connection count was 133 over 59 minutes. Total bytes transferred was only 46.11 KiB — a small, heartbeat-style beacon.
+RITA flagged the pair 192.168.99.54 to 159.65.220.246 with an 87.00% beacon score, marking it Medium severity. The connection count was 133 over 59 minutes. Total bytes transferred was only 46.11 KiB.
+
 ![RITA beacon view](pittytiger-rita-view.png)
 
 ## Investigation
@@ -23,13 +24,17 @@ RITA flagged the pair 192.168.99.54 to 159.65.220.246 with an 87.00% beacon scor
 ### Confirming the beaconing pattern
 
 Filtering Wireshark to initial SYN packets between the two hosts showed 133 connection attempts over the capture. The intervals between them varied between 24 and 30 seconds, clustering around 27 seconds.
+
 ![Wireshark packet list](pittytiger-packet-list.png)
-Unlike Zeus, which beaconed at a fixed 29-30 second interval, PittyTiger applies approximately 20% jitter to its beacon timing. This is a deliberate evasion technique designed to defeat simple detectors that look for perfectly regular intervals. RITA's 87% score reflects the added irregularity compared to Zeus's 87.5%.
+
+The beacon timing is deliberately jittered. Fixed-interval beacons are easy for simple detectors to spot; PittyTiger applies approximately 20% jitter to avoid this. RITA's 87% score reflects the added irregularity — a perfect fixed interval would score higher.
 
 ### Analyzing the beacon structure
 
 Following a single TCP stream revealed the beacon payload:
+
 ![Wireshark TCP stream](pittytiger-tcp-stream.png)
+
     GET /FC001/JOHNILJGPPDHFDJPMNGMAMPMJLBGMJIBLOBHBGBMOADDDJCBCGGNALHBHIMGLCEPGHDLLHGMGAOFAGBIPKFJEHNC...
     HTTP/1.1
     Accept: */*
@@ -74,12 +79,14 @@ The server acknowledged the request with a 200 OK but sent no content back. In t
 2. Block 159.65.220.246 and newb02.skypetm.com.tw at the perimeter
 3. Capture volatile memory before shutdown to preserve in-memory artifacts
 4. Hunt for the same beacon interval (24-30s jittered), User-Agent, and /FC001/ URL prefix across other hosts
-5. Escalate to incident response — the jitter and Taiwan domain suggest an APT, not commodity crimeware
+5. Escalate to incident response — the jitter and the anomalous domain suggest a targeted threat rather than commodity crimeware
 
 ## Lessons Learned
 
-PittyTiger demonstrates how malware authors adapt to detection. Where Zeus beaconed at a fixed interval (easy for simple detectors to spot), PittyTiger adds jitter to avoid tripping detectors tuned for regular timing. The trade-off is that jitter lowers the malware's own reliability — the C2 can't perfectly predict when a victim will check in.
+PittyTiger demonstrates how malware authors adapt to detection. Jittered beacon timing is a deliberate evasion against detectors tuned for regular intervals. The trade-off is that jitter reduces the malware's own reliability — the operator cannot predict exactly when a victim will check in.
 
-RITA's beacon scoring caught this pattern despite the jitter, scoring it at 87% rather than 100%. This is the value of statistical beacon detection over simple "fires every N seconds" rules. The detection remains effective even when the attacker deliberately introduces variation.
+RITA's beacon scoring caught the pattern despite the jitter, scoring it at 87% rather than 100%. This is the value of statistical beacon detection over simple "fires every N seconds" rules. The detection remains effective even when the attacker deliberately introduces variation.
 
-The small beacon size (46.11 KiB total, 133 connections) also distinguishes this from Zeus's 639 MB download pattern. PittyTiger is a quiet, patient RAT — it checks in regularly to maintain the channel but doesn't transfer large amounts of data. This is consistent with an espionage-focused threat rather than financial crimeware.
+The small beacon size (46.11 KiB total across 133 connections) indicates a persistent channel with minimal data transfer, not bulk payload delivery. This is consistent with an espionage-focused threat rather than financial crimeware.
+
+For a comparison of how this beacon differs from a fixed-interval malware capture, see the Zeus case study in this repository.
