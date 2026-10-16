@@ -85,7 +85,7 @@ None. This is a baseline capture with no malicious activity. All connections are
 
 ## Summary
 
-This capture established a baseline for a small home network over a one-hour window. Three findings came out of the analysis:
+This capture established a baseline for my small home network over a one-hour window. Three findings came out of the analysis:
 
 1. Device inventory was built from passive capture alone — no active scanning. Devices identified include a router/AP (Arcadyan), networking equipment (CommScope), an IoT device (Espressif), and a Nintendo console.
 
