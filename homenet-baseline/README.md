@@ -70,8 +70,6 @@ DNS queries showed expected destinations: http.kali.org from apt update, www.goo
 
 During analysis, TLS traffic from 192.168.1.173 (the Windows host machine running the VM) appeared in the pcap. The VM was able to see unicast traffic from a device it should not have been able to observe.
 
-Why this matters:
-
 On a properly isolated switched network, a VM should only see traffic to and from itself, plus broadcast traffic. It should not see unicast traffic between other devices. Host-to-destination traffic (like 192.168.1.173 to 140.82.113.26 for GitHub) is unicast. A VM on the same bridged network should not see it. The fact that it appeared suggests VMware's bridged networking is mirroring some host traffic to the guest's virtual interface.
 
 Impact:
