@@ -88,5 +88,3 @@ PittyTiger demonstrates how malware authors adapt to detection. Jittered beacon 
 RITA's beacon scoring caught the pattern despite the jitter, scoring it at 87% rather than 100%. This is the value of statistical beacon detection over simple "fires every N seconds" rules. The detection remains effective even when the attacker deliberately introduces variation.
 
 The small beacon size (46.11 KiB total across 133 connections) indicates a persistent channel with minimal data transfer, not bulk payload delivery. This is consistent with an espionage-focused threat rather than financial crimeware.
-
-For a comparison of how this beacon differs from a fixed-interval malware capture, see the Zeus case study in this repository.
