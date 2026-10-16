@@ -13,7 +13,7 @@ Analysis of a 1-hour packet capture from a home network, captured from a Kali Li
 - **Platform:** Kali Linux (VMware VM, bridged networking)
 - **Local network:** 192.168.1.0/24
 - **Capturing host:** 192.168.1.178 (Kali VM)
-- **SHA256 (scrubbed pcap):** a8997356b26fae0377ed99b184fe75ddb196a8c702bec24a16ccc7170612ee4d
+- **Capturing host:** 192.168.1.178 (Kali VM)
 
 ## Capture Notes
 
