@@ -64,7 +64,7 @@ Unicast traffic (actual browsing, DNS lookups, TLS sessions) came from the Kali 
 
 DNS queries showed expected destinations: http.kali.org from apt update, www.google.com from a Google login, www.youtube.com and i.ytimg.com from watching a video.
 
-![Wireshark DNS traffic](homenet-dns-2026-10-16.png)
+![Wireshark DNS traffic](home-traffic-dns-2026-10-16.png)
 
 ### Host traffic leak (security observation)
 
