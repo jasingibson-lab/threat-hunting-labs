@@ -17,7 +17,7 @@ Analysis of a 1-hour packet capture from an infected host showing command-and-co
 
 RITA flagged the pair 192.168.99.54 to 159.65.220.246 with an 87.00% beacon score, marking it Medium severity. The connection count was 133 over 59 minutes. Total bytes transferred was only 46.11 KiB.
 
-![RITA beacon view](pittytiger-rita-view.png)
+![RITA beacon view](screenshots/pittytiger-rita-view.png)
 
 ## Investigation
 
