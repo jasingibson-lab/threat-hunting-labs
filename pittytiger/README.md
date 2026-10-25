@@ -25,7 +25,7 @@ RITA flagged the pair 192.168.99.54 to 159.65.220.246 with an 87.00% beacon scor
 
 Filtering Wireshark to initial SYN packets between the two hosts showed 133 connection attempts over the capture. The intervals between them varied between 24 and 30 seconds, clustering around 27 seconds.
 
-![Wireshark packet list](pittytiger-packet-list.png)
+![Wireshark packet list](screenshots/pittytiger-packet-list.png)
 
 The beacon timing is deliberately jittered. Fixed-interval beacons are easy for simple detectors to spot; PittyTiger applies approximately 20% jitter to avoid this. RITA's 87% score reflects the added irregularity — a perfect fixed interval would score higher.
 
@@ -33,7 +33,7 @@ The beacon timing is deliberately jittered. Fixed-interval beacons are easy for 
 
 Following a single TCP stream revealed the beacon payload:
 
-![Wireshark TCP stream](pittytiger-tcp-stream.png)
+![Wireshark TCP stream](screenshots/pittytiger-tcp-stream.png)
 
     GET /FC001/JOHNILJGPPDHFDJPMNGMAMPMJLBGMJIBLOBHBGBMOADDDJCBCGGNALHBHIMGLCEPGHDLLHGMGAOFAGBIPKFJEHNC...
     HTTP/1.1
