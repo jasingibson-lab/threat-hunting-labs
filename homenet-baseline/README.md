@@ -52,7 +52,7 @@ For comparison:
 
 A baseline capture establishes what "normal" looks like. An analyst who knows their network's normal pattern can spot deviations faster. In this capture, nothing crossed the threshold from "legitimate background traffic" into "consistent with C2."
 
-![RITA beacon view](screenshots/homenet-rita-view-2026-10-16.png)
+![RITA beacon view](screenshots/homenet-wireshark-2026-10-16.png)
 
 ### Protocol mix
 
