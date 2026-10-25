@@ -52,7 +52,7 @@ For comparison:
 
 A baseline capture establishes what "normal" looks like. An analyst who knows their network's normal pattern can spot deviations faster. In this capture, nothing crossed the threshold from "legitimate background traffic" into "consistent with C2."
 
-![RITA beacon view](homenet-rita-view-2026-10-16.png)
+![RITA beacon view](screenshots/homenet-rita-view-2026-10-16.png)
 
 ### Protocol mix
 
@@ -60,7 +60,7 @@ The capture was dominated by broadcast and multicast protocols — SSDP, mDNS, I
 
 Unicast traffic (actual browsing, DNS lookups, TLS sessions) came from the Kali VM (192.168.1.178) and the Windows host (192.168.1.173), totaling about 1,800 packets combined.
 
-![Wireshark ping traffic](homenet-wireshark-2026-10-16.png)
+![Wireshark ping traffic](screenshots/homenet-wireshark-2026-10-16.png)
 
 DNS queries showed expected destinations: http.kali.org from apt update, www.google.com from a Google login, www.youtube.com and i.ytimg.com from watching a video.
 
